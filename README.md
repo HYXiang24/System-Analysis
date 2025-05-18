@@ -23,12 +23,13 @@
 
 1. 將整個專案資料夾放入 `xampp/htdocs/` 路徑下
 2. 啟動 XAMPP 中的 Apache & MySQL 模組
-3. 使用以下網址在本地瀏覽器開啟：
+3. 將sa.sql 匯入至MySQL裡
+4. 使用以下網址在本地瀏覽器開啟：
 
-### ▶ 使用者端網址
+### 使用者端網址
 127.0.0.1:Apache開放的port/專案名稱/SA_order_system/first.html
 
-### ▶ 管理者端網址
+### 管理者端網址
 127.0.0.1:Apache開放的port/專案名稱/SA_menu/main.html
 
 > 此專案僅能在本地端運行，請確認 XAMPP 已正確設定並啟動 Apache & MySQL。
