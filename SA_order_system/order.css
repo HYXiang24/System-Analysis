@@ -1,0 +1,177 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header img {
+    width: 250px; 
+}
+
+header {
+    background-color: #f2f2f2;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+main {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.category {
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.soldOutButton{
+    padding: 5px 10px;
+    background-color: gray;
+    color: white;
+    border: none;
+    cursor: not-allowed;
+    position: absolute;
+    right: 800px; 
+    top: 50%;
+    transform: translateY(-50%); 
+    min-width: 100px;
+    font-size: 15px;
+    border-radius: 15px;
+}
+
+.addToOrderButton {
+    padding: 5px 10px;
+    background-color: #ecd97c;
+    color: rgb(0, 0, 0);
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 800px; 
+    top: 50%;
+    transform: translateY(-50%); 
+    min-width: 100px;
+    font-size: 15px;
+    border-radius: 15px;
+}
+
+
+.incrementButton {
+    padding: 5px 10px;
+    background-color: #ecd97c;
+    color: rgb(0, 0, 0);
+    border: none;
+    cursor: pointer;
+    position: absolute; 
+    right: 340px;
+    top: 50%; 
+    transform: translateY(-50%); 
+    min-width: 50px;
+    font-size: 15px;
+    border-radius: 15px;
+}
+
+.decrementButton {
+    padding: 5px 10px;
+    background-color: #ecd97c;
+    color: rgb(0, 0, 0);
+    border: none;
+    cursor: pointer;
+    position: absolute; /* 使用绝对定位 */
+    right: 230px; /* 距离父容器右侧230px的位置 */
+    top: 50%; /* 垂直居中 */
+    transform: translateY(-50%); /* 垂直居中 */
+    min-width: 50px; /* 设置按钮的最小宽度 */
+    font-size: 15px; /* 设置字体大小 */
+    border-radius: 15px;
+}
+
+.incrementButton:hover,
+.decrementButton:hover {
+    background-color: #f0e36e;
+}
+
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+#cartContainer {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+#checkoutButton {
+    padding: 10px 15px;
+    background-color: #ecd97c;
+    color: rgb(0, 0, 0);
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 15px;
+}
+
+#checkoutButton:hover{
+    background-color: #f0e36e;
+}
+
+.time {
+    font-size: 18px;
+    color: #05101c; 
+    background-color: #fff0f5; 
+    padding: 10px 15px;
+    border: 2px solid #fec252; 
+    border-radius: 15px; /* 圓角 */
+    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+    position: absolute;
+    top: 20px;
+    left: 270px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 輕微陰影 */
+}
+
+.back-to-top {
+    background-color: #fbde86; 
+    color: white; /* 白色文字 */
+    border: none; /* 無邊框 */
+    padding: 10px 15px; /* 內邊距 */
+    border-radius: 50%; /* 圓形按鈕 */
+    font-size: 16px; /* 字體大小 */
+    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 輕微陰影 */
+    transition: opacity 0.3s; /* 過渡效果 */
+}
+
+.back-to-top:hover {
+    background-color: #fee87a; 
+}

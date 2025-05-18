@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Menu</title>
+</head>
+
+<body>
+    <div id="set_meal" class="category">
+        <h2>套餐</h2>
+        <div class="item">
+
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('get_menu.php')
+                .then(response => response.json()) // 將 response 轉換為 JSON 格式
+                .then(data => {
+                    const menu = data.menu; // 從 JSON 資料中獲取 menu
+
+                    menu.forEach(item => {
+                        const categorySection = document.getElementById('set_meal'); // 更正獲取 category 的方式
+                        console.log(item.category)
+
+                        const itemDiv = document.createElement('div'); // 創建 itemDiv
+                        itemDiv.classList.add('item'); // 添加 item 的 class
+
+                        const itemP = document.createElement('p');
+                        itemP.textContent = `${item.name} - NT$${item.price}`; // 使用 item 物件的屬性
+
+                        const addToOrderButton = document.createElement('button');
+                        addToOrderButton.className = 'addToOrderButton';
+                        addToOrderButton.textContent = '加入點餐';
+                        addToOrderButton.onclick = () => addToOrder(item.name, item.price); // 使用 item 物件的屬性
+
+                        const incrementButton = document.createElement('button');
+                        incrementButton.className = 'incrementButton';
+                        incrementButton.textContent = '+';
+                        incrementButton.onclick = () => increaseQuantity(item.name); // 使用 item 物件的屬性
+
+                        const decrementButton = document.createElement('button');
+                        decrementButton.className = 'decrementButton';
+                        decrementButton.textContent = '-';
+                        decrementButton.onclick = () => decreaseQuantity(item.name); // 使用 item 物件的屬性
+
+                        itemDiv.appendChild(itemP);
+                        itemDiv.appendChild(addToOrderButton);
+                        itemDiv.appendChild(incrementButton);
+                        itemDiv.appendChild(decrementButton);
+
+                        categorySection.appendChild(itemDiv);
+                    });
+                })
+                .catch(error => console.error('Error fetching menu:', error));
+        });
+    </script>
+</body>
+
+</html>

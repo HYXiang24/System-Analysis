@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新增菜品</title>
+  <link rel="stylesheet" href="add.css">
+</head>
+
+<body>
+  <h1>新增菜品</h1>
+  <form id="addForm" action="add_menu.php" method="POST" enctype="multipart/form-data">
+    <div>
+      <label for="itemclass">類別：</label>
+      <select id="category" name="category">
+        <option value="set_meal">套餐</option>
+        <option value="burger">漢堡</option>
+        <option value="toast">吐司</option>
+        <option value="snack">點心</option>
+        <option value="drink">飲料</option>
+      </select>
+    </div>
+    <div>
+      <label for="itemName">菜品名稱：</label>
+      <input type="text" id="itemName" name="itemName" required>
+    </div>
+    <div>
+      <label for="itemPrice">價格：</label>
+      <input type="number" id="itemPrice" name="itemPrice" required>
+    </div>
+    <div>
+      <label for="itemImage">圖片：</label>
+      <input type="file" id="itemImage" name="itemImage" accept="image/*" >
+    </div>
+    <button type="submit">新增</button>
+  </form>
+</body>
+
+</html>

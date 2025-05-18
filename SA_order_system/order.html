@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>早餐店點餐系統</title>
+    <link rel="stylesheet" href="order.css">
+</head>
+
+<body>
+    <header>
+        <img src="image/logo.png" alt="早餐店logo">
+        <div id="time" class="time"></div>
+        <button id="cartButton">購物車 (0項)</button>
+        <nav>
+            <ul>
+                <li><button onclick="scrollToCategory('set_meal')">套餐</button></li>
+                <li><button onclick="scrollToCategory('burger')">漢堡</button></li>
+                <li><button onclick="scrollToCategory('toast')">吐司</button></li>
+                <li><button onclick="scrollToCategory('snack')">點心</button></li>
+                <li><button onclick="scrollToCategory('drink')">飲料</button></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main>
+        <div id="set_meal" class="category">
+            <h2>套餐</h2>
+        </div>
+        <div id="burger" class="category">
+            <h2>漢堡</h2>
+        </div>
+
+        <div id="toast" class="category">
+            <h2>吐司</h2>
+        </div>
+        <div id="snack" class="category">
+            <h2>點心</h2>
+        </div>
+
+        <div id="drink" class="category">
+            <h2>飲料</h2>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('test.php')
+                .then(response => response.json()) // 將 response 轉換為 JSON 格式
+                .then(data => {
+                    const menu = data.menu; // 從 JSON 資料中獲取 menu
+
+                    menu.forEach(item => {
+                        let categorySection = document.getElementById(item.category); // 取得對應的 category
+
+                        const itemDiv = document.createElement('div'); // 創建 itemDiv
+                        itemDiv.classList.add('item'); // 添加 item 的 class
+
+                        const itemP = document.createElement('p');
+                        itemP.textContent = `${item.name} - NT$${item.price}`; // 使用 item 物件的屬性
+
+                        const addToOrderButton = document.createElement('button');
+                        
+                        if (!item.sufficient) {
+                            addToOrderButton.className = 'soldOutButton';
+                            addToOrderButton.textContent = '已售完';
+                            addToOrderButton.disabled = true;
+                        } else {
+                            addToOrderButton.className = 'addToOrderButton';
+                            addToOrderButton.textContent = '加入點餐';
+                            addToOrderButton.onclick = () => addToOrder(item.name, item.price); // 使用 item 物件的屬性
+                        }
+
+                        const incrementButton = document.createElement('button');
+                        incrementButton.className = 'incrementButton';
+                        incrementButton.textContent = '+';
+                        incrementButton.onclick = () => increaseQuantity(item.name); // 使用 item 物件的屬性
+
+                        const decrementButton = document.createElement('button');
+                        decrementButton.className = 'decrementButton';
+                        decrementButton.textContent = '-';
+                        decrementButton.onclick = () => decreaseQuantity(item.name); // 使用 item 物件的屬性
+
+                        itemDiv.appendChild(itemP);
+                        itemDiv.appendChild(addToOrderButton);
+                        itemDiv.appendChild(incrementButton);
+                        itemDiv.appendChild(decrementButton);
+
+                        categorySection.appendChild(itemDiv);
+                    });
+                })
+                .catch(error => console.error('Error fetching menu:', error));
+        });
+    </script>
+    <footer>
+        <p>食六早午餐</p>
+    </footer>
+
+    <div id="cartContainer">
+        <h2>您的購物車</h2>
+        <ul id="cartItems"></ul>
+        <p id="totalPrice">總金額: NT$0</p>
+        <button id="checkoutButton">結帳</button>
+    </div>
+
+    <script src="order.js"></script>
+</body>
+
+</html>

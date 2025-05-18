@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>顧客登入</title>
+<link rel="stylesheet" href="enter.css">
+</head>
+<body>
+    <div class="container">
+        <h2>輸入您的資料</h2>
+        <form id="loginForm" action="enter.php" method="POST">
+            <!--<div class="form-group">
+                <label for="nickname">暱稱:</label>
+                <input type="text" id="nickname" name="nickname" required>
+            </div>-->
+            <div class="form-group">
+                <label for="phone">電話號碼:</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+                <small>請輸入10位數字的電話號碼</small>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="進入點餐">
+            </div>
+        </form>
+    </div>
+
+    <!-- <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            var nickname = document.getElementById('nickname').value;
+            var phone = document.getElementById('phone').value;
+
+            window.location.href = 'order.html';
+        });
+    </script> -->
+</body>
+</html>

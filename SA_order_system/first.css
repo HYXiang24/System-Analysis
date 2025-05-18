@@ -1,0 +1,102 @@
+body {
+    text-align: center;
+    overflow: hidden; /* 禁止页面滚动 */
+    background-image: url('image/background.png'); /* 替换 'image/background.jpg' 为你的背景图路径 */
+    background-size: cover; /* 背景图填满整个视窗 */
+    background-position: center; /* 背景图居中 */
+    background-repeat: no-repeat; /* 不重复显示背景图 */
+    overflow-x: hidden; /* 隐藏水平滚动条 */
+}
+/* 椭圆形状的按钮样式 */
+button.oval {
+    margin: 20px auto 0; /* 将按钮居中显示 */
+    padding: 15px 30px;
+    background-color: #f1ffbe;
+    color: #0f0607;
+    border: none;
+    border-radius: 50px; /* 将按钮的边框半径设置为50px，使其呈现椭圆形状 */
+    cursor: pointer;
+    transition: box-shadow 0.3s ease; /* 添加阴影过渡效果 */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* 默认阴影效果 */
+    font-size: 20px; /* 设置按钮内文字的字体大小为16px */
+}
+
+/* 悬停效果 */
+button.oval:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 悬停时的阴影效果 */
+}
+
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+header img {
+    width: 500px; /* 你可以根据需要调整logo的宽度 */
+}
+
+h1 {
+    margin: 10px 0;
+}
+
+.carousel {
+    display: flex;
+    overflow: hidden;
+    width: 80%; /* 根据需要调整宽度 */
+    margin: 20px auto 0; /* 在上方增加 20 像素的间隙 */
+    position: relative;
+}
+
+.carousel img {
+    width: calc(25% - 10px); /* 每个图片占容器宽度的四分之一，减去间隔 */
+    flex-shrink: 0;
+    margin: 0 5px; /* 图片之间的间隔 */
+}
+
+.carousel-container {
+    display: flex;
+    width: calc(100% * 9 / 4); /* 确保容器能够容纳所有图片，9 是图片数量 */
+    animation: slide 36s infinite; /* 动画时间调整为36秒 */
+}
+
+@keyframes slide {
+    0% { transform: translateX(0); }
+    11.11% { transform: translateX(0); }
+    22.22% { transform: translateX(-25%); }
+    33.33% { transform: translateX(-25%); }
+    44.44% { transform: translateX(-50%); }
+    55.56% { transform: translateX(-50%); }
+    66.67% { transform: translateX(-75%); }
+    77.78% { transform: translateX(-75%); }
+    88.89% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
+}
+
+.icon-row {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 將內容水平置中 */
+    gap: 12px;
+    margin-top: 10px; /* 在下方增加 10 像素的间隙 */
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+}
+/* main 中文字内容的字体大小设置 */
+main p {
+    font-size: 18px; /* 设置 main 区域中文字内容的字体大小为 14px */
+}
+
+footer img {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    bottom: 10px; /* 调整底部间距 */
+    left: 50%;
+    transform: translateX(-50%);
+}

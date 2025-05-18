@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>修改菜品</title>
+  <link rel="stylesheet" href="change.css">
+</head>
+
+<body>
+  <h1>修改菜品</h1>
+  <form id="changeForm" action="update_menu.php" method="post">
+    <div>
+      <label for="itemclass">類別：</label>
+      <select id="itemclass" name="itemclass">
+        <option value="set_meal">套餐</option>
+        <option value="burger">漢堡</option>
+        <option value="toast">吐司</option>
+        <option value="snack">點心</option>
+        <option value="drink">飲料</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="itemName">菜品名稱：</label>
+      <input type="text" id="itemname" name="itemname" required>
+    </div>
+
+    <div>
+      <label for="itemPrice">價格：</label>
+      <input type="number" id="itemPrice" name="itemPrice" required>
+    </div>
+    <div>
+      <label for="itemImage">圖片：</label>
+      <input type="file" id="itemImage" name="itemImage" accept="image/*">
+    </div>
+    <button type="submit">確定修改</button>
+  </form>
+
+
+  <script>
+    function getUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        category: params.get('category'),
+        name: params.get('name'),
+        price: params.get('price')
+      };
+    }
+
+    // Set form default values based on URL parameters
+    document.addEventListener('DOMContentLoaded', function () {
+      const params = getUrlParams();
+
+      if (params.category) {
+        document.querySelector('select[name="itemclass"]').value = params.category;
+      }
+
+      if (params.name) {
+        document.querySelector('input[name="itemname"]').value = params.name;
+      }
+
+      if (params.price) {
+        document.querySelector('input[name="itemPrice"]').value = params.price;
+      }
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>菜單</title>
+  <link rel="stylesheet" href="menu.css">
+</head>
+
+<body>
+  <div id="menu-container" class="menu-container">
+
+  </div>
+
+  <button class="btn-add" onclick="location.href='add.html';">新增</button>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      fetch('get_menu.php')
+        .then(response => response.json()) // 將 response 轉換為 JSON 格式
+        .then(data => {
+          const menu = data.menu; // 從 JSON 資料中獲取 menu
+          menu.forEach(item => {
+            const menuContainer = document.getElementById('menu-container');
+            const menuItem = document.createElement('div');
+            menuItem.classList.add('menu-item');
+            //圖片
+            const img = document.createElement('img');
+            
+            img.src = `${item.image_path}`;
+            if(img.src == 'http://192.168.1.111:11451/SA/SA_menu/image/'){
+              img.src = `./image/upload.jpg`;
+            }
+            img.alt = '菜品圖片';
+            menuItem.appendChild(img);
+
+            // 創建並添加菜品資訊
+            const itemDetails = document.createElement('div');
+            itemDetails.classList.add('item-details');
+            menuItem.appendChild(itemDetails);
+
+            // 添加菜品分類
+            const title = document.createElement('h4');
+            switch (item.category) {
+              case 'drink':
+                title.textContent = '飲料';
+                break;
+              case 'snack':
+                title.textContent = '點心';
+                break;
+              case 'toast':
+                title.textContent = '吐司';
+                break;
+              case 'set_meal':
+                title.textContent = '套餐';
+                break;
+              case 'burger':
+                title.textContent = '漢堡';
+                break;
+            }
+            itemDetails.appendChild(title);
+
+
+            // 添加菜品名稱
+            const name = document.createElement('h3');
+            name.textContent = `${item.name}`;
+            itemDetails.appendChild(name);
+
+            // 添加價格
+            const priceTag = document.createElement('p');
+            priceTag.textContent = `NT$${item.price}`;
+            itemDetails.appendChild(priceTag);
+
+            // 創建並添加按鈕容器
+            const itemActions = document.createElement('div');
+            itemActions.classList.add('item-actions');
+            menuItem.appendChild(itemActions);
+
+            // 添加修改按鈕
+            const editButton = document.createElement('button');
+            editButton.classList.add('btn-edit');
+            editButton.textContent = '修改';
+            editButton.addEventListener('click', function () {
+              window.location.href = `change.html?category=${item.category}&name=${item.name}&price=${item.price}`;
+            });
+            itemActions.appendChild(editButton);
+
+            // 添加刪除按鈕
+            const deleteButton = document.createElement('button');
+            deleteButton.classList.add('btn-delete');
+            deleteButton.textContent = '刪除';
+            deleteButton.setAttribute('data-id', item.name);
+            deleteButton.addEventListener('click', function () {
+              const confirmed = confirm('確定要刪除這個菜品嗎？');
+              if (confirmed) {
+                // 發送 AJAX 請求到服務器以刪除菜品
+                var itemId = this.getAttribute('data-id');
+                deleteItem(itemId);
+              }
+            });
+            itemActions.appendChild(deleteButton);
+
+            // 將菜單項目添加到菜單容器中
+            menuContainer.appendChild(menuItem);
+          });
+        })
+        .catch(error => console.error('Error fetching menu:', error));
+    });
+    function deleteItem(itemId) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'delete_menu.php', true);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          console.log(xhr.responseText);
+          // 在這裡處理 PHP 回應，可以更新頁面或顯示提示
+          location.reload();
+        }
+      };
+      xhr.send('id=' + itemId);
+    }
+  </script>
+</body>
+
+</html>
